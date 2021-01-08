@@ -1,4 +1,4 @@
-# Docker + HTR Merged Mining
+# Yiimp + HTR Merged Mining
 
 ## Build and run yiimp with docker
 ```bash
