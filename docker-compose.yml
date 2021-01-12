@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  bitcoind:
+    container_name: bitcoind
+    stdin_open: true
+    image: thr0wn/bitcoind-regtest-mode:latest
+    ports:
+      - "1111:1111"
+      - "1112:1112"
+  yiimp:
+    container_name: yiimp
+    stdin_open: true
+    build:
+      context: .
+    tmpfs:
+      - /tmp
+      - /run
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    ports:
+      - "80:80"
+      - "3306:3306"
+      - "3333:3333"

@@ -9,7 +9,6 @@
 #   v0.2 (update Avril, 2020)
 # 
 ################################################################################
-	
 
     output() {
     printf "\E[0;33;40m"
@@ -23,6 +22,11 @@
     echo
     exit 1;
     }
+
+    if [ -f /etc/screen-scrypt.sh ]; then
+        echo "Yiimp installed!"
+        exit 0
+    fi
 
     #Add user group sudo + no password
     whoami=`whoami`
@@ -875,8 +879,10 @@
     # Create database
     Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
     Q2="GRANT ALL ON *.* TO 'panel'@'localhost' IDENTIFIED BY '$password';"
-    Q3="CREATE USER root@172.17.0.1 IDENTIFIED BY 'root';"
-    Q4="GRANT ALL ON *.* TO 'root'@'172.17.0.1' IDENTIFIED BY 'root';"
+    
+    # unsafe root user
+    Q3="CREATE USER root IDENTIFIED BY 'root';"
+    Q4="GRANT ALL ON *.* TO 'root' IDENTIFIED BY 'root';"
     Q5="FLUSH PRIVILEGES;"
     SQL="${Q1}${Q2}${Q3}${Q4}${Q5}"
     sudo mysql -u root -p="" -e "$SQL"
@@ -889,7 +895,10 @@
 
     # Sets mariadb conf bind to 0.0.0.0 to enable remote access
     sed -i '29s/.*/bind-address            = 0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-    
+   
+    # start stratum server on startup
+    sed -i '11i\ screen -dmS sha $STRATUM_DIR/run.sh sha' /etc/screen-scrypt.sh
+
     #Create my.cnf
     
     echo '
@@ -973,6 +982,11 @@
     sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
+
+    # enable btc mining
+    SQL="UPDATE yiimpfrontend.coins SET visible = 1, rpcport = 1112, rpchost = 'bitcoind', rpcuser = 'root', rpcpasswd = 'root', enable = 1, auto_ready = 1, available = 1, usesegwit = 1, hasgetinfo = 0 WHERE id = 6;"
+    sudo mysql -u root -p="" -e "$SQL"
+
     echo -e "$GREEN Done...$COL_RESET"
         
     

@@ -1,21 +1,19 @@
 # Yiimp + HTR Merged Mining
 
-## Build and run yiimp with docker
+## Build and run yiimp + bitcoind + hathor-cli
 ```bash
-bash docker-install.sh
+sudo docker-compose up -d \
+sudo docker-compose exec yiimp bash install-localhost.sh \
+sudo docker-compose restart yiimp
 ```
-> Go [here](http://localhost) to access the main screen!
 
-> Go [here](http://localhost/site/myadmin) to access the admin panel!
+> Go [localhost](http://localhost) to access the main screen!
+
+> Go [localhost/site/myadmin](http://localhost/site/myadmin) to access the admin panel!
 
 > Mysql access available at localhost:3306 (user: root, password: root)!
 
 ## Merged mining HTR! (Not working, just a proposal)
-```bash
-# Run a stratum server algo
-docker exec -it yiimp /var/stratum/run.sh sha
-```
-
 ```bash
 docker run --rm tpruvot/cpuminer-multi  -a sha256d --url=stratum+tcp://172.17.0.1:3333 -u address -c=HTR
 ```
@@ -25,11 +23,6 @@ docker run --rm tpruvot/cpuminer-multi  -a sha256d --url=stratum+tcp://172.17.0.
 ```bash
 # yiimp checkup
 docker exec -it yiimp yiimp checkup
-```
-
-```bash
-# Run a stratum server algo
-docker exec -it yiimp /var/stratum/run.sh sha
 ```
 
 ```bash

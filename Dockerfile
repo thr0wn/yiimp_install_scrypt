@@ -15,4 +15,6 @@ RUN su - pool
 WORKDIR /yiimp_install_scrypt
 COPY . .
 
+VOLUME /run /tmp
+
 SHELL ["/bin/bash", "-c"]
