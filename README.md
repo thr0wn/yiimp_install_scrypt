@@ -2,8 +2,8 @@
 
 ## Build and run yiimp + bitcoind + hathor-cli
 ```bash
-sudo docker-compose up -d \
-sudo docker-compose exec yiimp bash install-localhost.sh \
+sudo docker-compose up -d && \
+sudo docker-compose exec yiimp bash install-localhost.sh && \
 sudo docker-compose restart yiimp
 ```
 
@@ -15,7 +15,7 @@ sudo docker-compose restart yiimp
 
 ## Merged mining HTR! (Not working, just a proposal)
 ```bash
-docker run --rm tpruvot/cpuminer-multi  -a sha256d --url=stratum+tcp://172.17.0.1:3333 -u address -c=HTR
+docker run --rm tpruvot/cpuminer-multi  -a sha256d --url=stratum+tcp://localhost:3333 -u address -c=HTR
 ```
 
 ## Utilities
