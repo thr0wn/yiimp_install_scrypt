@@ -10,7 +10,7 @@ services:
   namecoind:
     container_name: namecoind
     stdin_open: true
-    build: thr0wn/namecoind-regtest-mode:latest
+    image: thr0wn/namecoind-regtest-mode:latest
     ports:
       - "3333:3333"
       - "3334:3334"
