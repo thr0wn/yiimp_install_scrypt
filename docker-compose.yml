@@ -5,15 +5,15 @@ services:
     stdin_open: true
     image: thr0wn/bitcoind-regtest-mode:latest
     ports:
-      - "1111:1111"
-      - "1112:1112"
+      - "11111:1111"
+      - "11112:1112"
   namecoind:
     container_name: namecoind
     stdin_open: true
     image: thr0wn/namecoind-regtest-mode:latest
     ports:
-      - "3333:3333"
-      - "3334:3334"
+      - "21111:1111"
+      - "21112:1112"
   yiimp:
     container_name: yiimp
     stdin_open: true
