@@ -369,7 +369,7 @@
     
     # Compil Blocknotify
     cd ~
-    hide_output git clone https://github.com/Kudaraidee/yiimp.git
+    hide_output git clone git@github.com:HathorNetwork/yiimp.git
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     hide_output sudo make
@@ -984,8 +984,8 @@
     sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
 
     # enable btc mining
-    Q1="UPDATE yiimpfrontend.coins SET visible = 1, rpcport = 11112, rpchost = 'bitcoind', rpcuser = 'root', rpcpasswd = 'root', enable = 1, auto_ready = 1, available = 1, usesegwit = 1, hasgetinfo = 0 WHERE id = 6;"
-    Q2="UPDATE yiimpfrontend.coins SET visible = 1, rpcport = 21112, rpchost = 'namecoind', rpcuser = 'root', rpcpasswd = 'root', enable = 1, auto_ready = 1, available = 1, usesegwit = 1, hasgetinfo = 0 WHERE id = 577;"
+    Q1="UPDATE yiimpfrontend.coins SET visible = 1, rpcport = 1112, rpchost = 'bitcoind', rpcuser = 'root', rpcpasswd = 'root', enable = 1, auto_ready = 1, available = 1, usesegwit = 1, hasgetinfo = 0 WHERE id = 6;"
+    Q2="UPDATE yiimpfrontend.coins SET visible = 1, rpcport = 1112, rpchost = 'namecoind', rpcuser = 'root', rpcpasswd = 'root', enable = 1, auto_ready = 1, available = 1, usesegwit = 1, hasgetinfo = 0 WHERE id = 577;"
     SQL="${Q1}${Q2}"
     sudo mysql -u root -p="" -e "$SQL"
 
